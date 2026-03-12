@@ -204,6 +204,7 @@ img { max-width: 100%; display: block; }
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  min-width: 100%;
 }
 
 .hero__left { max-width: 672px; }
@@ -213,6 +214,7 @@ img { max-width: 100%; display: block; }
   font-weight: 400;
   line-height: 1.55;
   margin-bottom: 16px;
+  max-width: 428px;
 }
 
 .hero__desc {
@@ -290,7 +292,7 @@ img { max-width: 100%; display: block; }
 .about__text {
   font-size: 15.931px;
   color: var(--gray-850);
-  line-height: 1.67;
+  line-height: 167.34%;
   max-width: 488px;
   margin-right: auto;
 }
@@ -344,7 +346,7 @@ img { max-width: 100%; display: block; }
 /* ============================================
    4 BASICS SECTION
    ============================================ */
-.basics { padding: 20px 0 120px; }
+.basics { padding: 20px 0 120px; position: relative; overflow: hidden; }
 
 .basics__header {
   display: flex;
@@ -368,12 +370,15 @@ img { max-width: 100%; display: block; }
   background-clip: text;
 }
 
-.basics__sidebar {
-  flex-shrink: 0;
+.basics__sidebar-dots {
+  position: absolute;
+  right: 94px;
+  top: 0;
   width: 23px;
+  height: 607px;
+  z-index: 1;
+  pointer-events: none;
 }
-
-.basics__sidebar-img { width: 23px; height: 607px; }
 
 .basics__rows { padding: 0 111px 0 0; }
 
@@ -394,6 +399,10 @@ img { max-width: 100%; display: block; }
   font-weight: 700;
   white-space: nowrap;
   flex-shrink: 0;
+}
+
+.basics__row:nth-child(n+2) .basics__row-title {
+  font-size: 36px;
 }
 
 .basics__row-desc {
@@ -426,11 +435,15 @@ img { max-width: 100%; display: block; }
    ============================================ */
 .writing { padding: 80px 0 120px; }
 
-.writing__top {
+.writing__title-wrap {
+  text-align: right;
+  margin-bottom: 40px;
+}
+
+.writing__content {
   display: flex;
   gap: 60px;
   align-items: flex-start;
-  margin-bottom: 40px;
 }
 
 .writing__illustration {
@@ -460,8 +473,6 @@ img { max-width: 100%; display: block; }
   50% { transform: translateY(-14px); }
 }
 
-.writing__text { flex: 1; text-align: right; }
-
 .writing__title {
   font-size: 73.289px;
   font-weight: 700;
@@ -470,8 +481,8 @@ img { max-width: 100%; display: block; }
 }
 
 .writing__right-side {
+  flex: 1;
   text-align: right;
-  padding-right: 541px;
 }
 
 .writing__box {
@@ -518,19 +529,21 @@ img { max-width: 100%; display: block; }
   position: relative;
   padding: 80px 0;
   overflow: hidden;
+  background: #272727;
 }
 
 .programs__bg {
   position: absolute;
   inset: 0;
   z-index: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(50,50,50,0.6) 0%, transparent 70%),
+    radial-gradient(ellipse at 70% 30%, rgba(60,60,60,0.4) 0%, transparent 60%),
+    linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 30%, #1f1f1f 60%, #252525 100%);
 }
 
 .programs__bg-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.9;
+  display: none;
 }
 
 .programs__blur {
@@ -561,14 +574,18 @@ img { max-width: 100%; display: block; }
 
 .programs__cards {
   display: flex;
+  flex-direction: row;
   gap: 120px;
   justify-content: center;
+  align-items: stretch;
   position: relative;
   z-index: 3;
+  flex-wrap: nowrap;
 }
 
 .programs__card {
   width: 519px;
+  min-width: 519px;
   height: 845px;
   position: relative;
   border-radius: 0 0 0 75px;
@@ -581,6 +598,7 @@ img { max-width: 100%; display: block; }
   flex-direction: column;
   justify-content: flex-end;
   padding: 44px;
+  flex-shrink: 0;
 }
 
 .programs__card-decor {
@@ -653,15 +671,18 @@ img { max-width: 100%; display: block; }
 .vision__box {
   display: flex;
   border: 1px solid var(--gray-600);
+  border-radius: 0;
   margin-bottom: 120px;
 }
 
 .vision__box-content {
   flex: 1;
   background: var(--gray-300);
+  border-right: 1px solid var(--gray-600);
   padding: 30px 34px;
   display: flex;
   align-items: flex-end;
+  border-radius: 0;
 }
 
 .vision__box-content p {
@@ -682,21 +703,36 @@ img { max-width: 100%; display: block; }
   padding: 18px;
   overflow: hidden;
   position: relative;
+  border-radius: 0;
+}
+
+.vision__box-label::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('assets/images/texture-bg.jpg') center/cover;
+  transform: scaleY(-1);
+  z-index: 0;
 }
 
 .vision__box-label-top {
   padding: 10px;
   text-align: right;
+  position: relative;
+  z-index: 1;
 }
 
 .vision__box-label-top h3 {
   font-size: 40px;
   font-weight: 700;
   line-height: 1.75;
+  color: var(--white);
 }
 
 .vision__box-label-bottom {
   padding: 10px;
+  position: relative;
+  z-index: 1;
 }
 
 .vision__icon { width: 119px; height: 89px; }
@@ -705,9 +741,8 @@ img { max-width: 100%; display: block; }
 .mission { margin-top: 60px; }
 
 .mission__header {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: flex-end;
   gap: 30px;
   margin-bottom: 60px;
   background: var(--white);
@@ -715,6 +750,7 @@ img { max-width: 100%; display: block; }
   height: 47px;
   border-radius: 28px;
   overflow: hidden;
+  float: right;
 }
 
 .mission__label {
@@ -730,6 +766,7 @@ img { max-width: 100%; display: block; }
   display: flex;
   flex-direction: column;
   gap: 6px;
+  clear: both;
 }
 
 .mission__row {
@@ -773,7 +810,7 @@ img { max-width: 100%; display: block; }
 
 .core__card--img-end {
   border-color: var(--gray-500);
-  flex-direction: row-reverse;
+  border-radius: 0 0 60px 0;
 }
 
 .core__card-image {
@@ -995,7 +1032,7 @@ img { max-width: 100%; display: block; }
   .footer__inner { gap: 80px; }
   .basics__rows { padding: 0; }
   .basics__row { gap: 40px; }
-  .writing__right-side { padding-right: 0; }
+  .writing__content { flex-direction: column; }
   .writing__point-content p { font-size: 28px; }
 }
 
@@ -1007,10 +1044,10 @@ img { max-width: 100%; display: block; }
   .hero__bottom { flex-direction: column; align-items: center; }
   .about__grid { flex-direction: column; gap: 60px; }
   .about__left { width: 100%; }
-  .basics__sidebar { display: none; }
+  .basics__sidebar-dots { display: none; }
   .basics__row { flex-direction: column; gap: 12px; }
   .basics__row-desc, .basics__row-sub { width: auto; }
-  .writing__top { flex-direction: column; }
+  .writing__content { flex-direction: column; }
   .writing__illustration { width: 300px; height: 350px; margin: 0 auto; }
   .writing__title { font-size: 40px; }
   .vision__box { flex-direction: column; }
