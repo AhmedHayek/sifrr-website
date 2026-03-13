@@ -189,7 +189,14 @@ img { max-width: 100%; display: block; }
   width: 100%;
 }
 
-.hero__right { flex-shrink: 0; text-align: right; }
+.hero__right {
+  flex-shrink: 0;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0;
+}
 
 .hero__title {
   font-size: 179.535px;
@@ -204,10 +211,13 @@ img { max-width: 100%; display: block; }
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  min-width: 100%;
+  margin-top: -0.05em;
 }
 
-.hero__left { max-width: 672px; }
+.hero__left {
+  max-width: 672px;
+  text-align: right;
+}
 
 .hero__subtitle {
   font-size: 24px;
@@ -221,7 +231,7 @@ img { max-width: 100%; display: block; }
   font-size: 21.229px;
   color: var(--gray-800);
   line-height: 1.35;
-  width: 190px;
+  max-width: 420px;
 }
 
 .hero__bottom {
@@ -254,15 +264,15 @@ img { max-width: 100%; display: block; }
 }
 
 /* Hero Animations */
-.anim-hero-right { opacity: 0; transform: translateX(200px); }
-.anim-hero-left { opacity: 0; transform: translateX(-200px); }
-.anim-hero-bottom { opacity: 0; transform: translateY(100px); }
-.anim-hero-top { opacity: 0; transform: translateY(-87px); }
+.anim-hero-right { opacity: 0; transform: translateX(80px); }
+.anim-hero-left { opacity: 0; transform: translateX(-80px); }
+.anim-hero-bottom { opacity: 0; transform: translateY(60px); }
+.anim-hero-top { opacity: 0; transform: translateY(-40px); }
 
-.anim-hero-right.animate-in { animation: slideFromRight 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards; }
-.anim-hero-left.animate-in { animation: slideFromLeft 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.2s forwards; }
-.anim-hero-bottom.animate-in { animation: slideFromBottom 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.4s forwards; }
-.anim-hero-top.animate-in { animation: slideFromTop 1s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s forwards; }
+.anim-hero-right.animate-in { animation: slideFromRight 1s cubic-bezier(0.25,0.46,0.45,0.94) forwards; }
+.anim-hero-left.animate-in { animation: slideFromLeft 1s cubic-bezier(0.25,0.46,0.45,0.94) 0.15s forwards; }
+.anim-hero-bottom.animate-in { animation: slideFromBottom 0.9s cubic-bezier(0.25,0.46,0.45,0.94) 0.25s forwards; }
+.anim-hero-top.animate-in { animation: slideFromTop 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.05s forwards; }
 
 @keyframes slideFromRight { to { opacity: 1; transform: translateX(0); } }
 @keyframes slideFromLeft { to { opacity: 1; transform: translateX(0); } }
@@ -462,11 +472,12 @@ img { max-width: 100%; display: block; }
 .writing__float {
   position: absolute;
   animation: float 3s ease-in-out infinite;
+  opacity: 0.85;
 }
 .writing__float--1 { top: -5px; right: -12px; width: 118px; }
 .writing__float--2 { bottom: 40px; left: -30px; width: 60px; animation-delay: 1s; }
 .writing__float--3 { bottom: 100px; right: -20px; width: 50px; animation-delay: 2s; }
-.writing__float--4 { top: 70px; right: 60px; width: 80px; opacity: 0.4; transform: rotate(-17deg); animation-delay: 0.5s; }
+.writing__float--4 { top: 70px; right: 60px; width: 80px; opacity: 0.65; animation-delay: 0.5s; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
