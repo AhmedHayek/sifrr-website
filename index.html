@@ -3,327 +3,266 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>صفر | Sifrr - من الصفر للاحتراف</title>
-  <meta name="description" content="أول مركز عربي للابتكار البرمجي في العالم العربي">
+  <title>صفر — قريباً</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --void: #0a0a0f;
+      --neon: #00f5d4;
+      --coral: #f5928b;
+      --glow: rgba(0, 245, 212, 0.4);
+      --glass: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+    }
+
+    html { height: 100%; }
+    body {
+      min-height: 100%;
+      font-family: 'Noto Sans Arabic', sans-serif;
+      background: var(--void);
+      color: #fff;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Animated gradient background */
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 120% 80% at 20% 20%, rgba(0, 245, 212, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 100% 100% at 80% 80%, rgba(245, 146, 139, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(100, 80, 255, 0.08) 0%, transparent 45%);
+      animation: bgShift 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgShift {
+      0% { opacity: 1; transform: scale(1) rotate(0deg); }
+      100% { opacity: 0.9; transform: scale(1.05) rotate(1deg); }
+    }
+
+    /* Grid overlay */
+    .grid {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 70%);
+      animation: gridPulse 8s ease-in-out infinite;
+    }
+
+    @keyframes gridPulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* Floating orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.2;
+      z-index: 0;
+      animation: float 15s ease-in-out infinite;
+    }
+    .orb--1 { width: 300px; height: 300px; background: var(--neon); left: 10%; top: 20%; animation-delay: 0s; }
+    .orb--2 { width: 200px; height: 200px; background: var(--coral); right: 15%; bottom: 25%; animation-delay: -5s; }
+    .orb--3 { width: 180px; height: 180px; background: #7b2cbf; left: 50%; bottom: 10%; animation-delay: -10s; }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -40px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+
+    /* Main content */
+    .coming {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+      max-width: 720px;
+    }
+
+    /* Glass card */
+    .card {
+      background: var(--glass);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 32px;
+      padding: 3.5rem 2.5rem;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.05) inset,
+        0 40px 80px -20px rgba(0,0,0,0.5),
+        0 0 80px -20px var(--glow);
+      animation: cardGlow 6s ease-in-out infinite;
+    }
+
+    @keyframes cardGlow {
+      0%, 100% { box-shadow: 0 0 0 1px rgba(255,255,255,0.05) inset, 0 40px 80px -20px rgba(0,0,0,0.5), 0 0 60px -20px var(--glow); }
+      50% { box-shadow: 0 0 0 1px rgba(255,255,255,0.08) inset, 0 40px 80px -20px rgba(0,0,0,0.5), 0 0 100px -15px var(--glow); }
+    }
+
+    .brand {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      background: linear-gradient(135deg, #fff 0%, var(--neon) 50%, var(--coral) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientMove 5s linear infinite;
+      margin-bottom: 0.5rem;
+    }
+
+    @keyframes gradientMove {
+      to { background-position: 200% center; }
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--neon);
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      animation: badgePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    .title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.75rem;
+      text-shadow: 0 0 40px var(--glow);
+    }
+
+    .title-ar {
+      font-family: 'Noto Sans Arabic', sans-serif;
+      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      font-weight: 700;
+      color: rgba(255,255,255,0.95);
+      margin-bottom: 1.5rem;
+    }
+
+    .tagline {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      max-width: 36ch;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* Cooking indicator */
+    .cook {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--neon);
+      text-transform: uppercase;
+    }
+
+    .cook-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .cook-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--neon);
+      box-shadow: 0 0 12px var(--neon);
+      animation: cookBounce 1.4s ease-in-out infinite both;
+    }
+
+    .cook-dots span:nth-child(1) { animation-delay: 0s; }
+    .cook-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .cook-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes cookBounce {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Ring */
+    .ring {
+      position: absolute;
+      inset: -2px;
+      border-radius: 34px;
+      border: 1px solid transparent;
+      background: linear-gradient(var(--void), var(--void)) padding-box,
+                  linear-gradient(135deg, var(--neon), transparent 40%, var(--coral), transparent 70%, var(--neon)) border-box;
+      opacity: 0.4;
+      animation: ringRotate 10s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes ringRotate {
+      to { transform: rotate(360deg); }
+    }
+
+    .card-wrap { position: relative; }
+
+    @media (max-width: 600px) {
+      .card { padding: 2.5rem 1.5rem; }
+      .badge { letter-spacing: 0.2em; font-size: 0.65rem; }
+    }
+  </style>
 </head>
 <body>
+  <div class="bg" aria-hidden="true"></div>
+  <div class="grid" aria-hidden="true"></div>
+  <div class="orb orb--1" aria-hidden="true"></div>
+  <div class="orb orb--2" aria-hidden="true"></div>
+  <div class="orb orb--3" aria-hidden="true"></div>
 
-  <!-- ===================== HERO SECTION ===================== -->
-  <section class="hero" id="hero">
-    <img src="assets/images/hero-vector.svg" class="hero__bg-vector" alt="" aria-hidden="true">
-
-    <nav class="nav anim-hero-top">
-      <div class="nav__inner">
-        <img src="assets/images/sifrr-logo.svg" alt="صفر" class="nav__logo-img">
-        <ul class="nav__menu">
-          <li><a href="#company">شركة</a></li>
-          <li><a href="#tools">أدواتنا</a></li>
-          <li><a href="#ready">الحلول الجاهزة</a></li>
-          <li><a href="#solutions">الحلول والصناعات</a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <div class="hero__content">
-      <div class="hero__right anim-hero-right">
-        <h1 class="hero__title">من الصفر</h1>
-        <p class="hero__title hero__title--gradient">للأحتراف</p>
-      </div>
-      <div class="hero__left anim-hero-left">
-        <p class="hero__subtitle">أول مــركـز <span class="text-accent">عـربي</span> للابـتكار الـبرمجي في العالم العربي</p>
-        <p class="hero__desc">تحويل رؤيتك إلى واقع رقـمـي مـتكـامل  مـن التخطيط الأولي حـتـى الإطــلاق الاحـتـرافـــي</p>
-      </div>
+  <main class="coming">
+    <div class="card-wrap">
+      <div class="ring" aria-hidden="true"></div>
+      <article class="card">
+        <p class="badge">2050</p>
+        <h1 class="brand">صفر</h1>
+        <h2 class="title">Coming Soon</h2>
+        <p class="title-ar">قريباً</p>
+        <p class="tagline">Something is cooking. We're building the next chapter of digital innovation—from zero to mastery.</p>
+        <p class="tagline" style="margin-bottom: 0;">شيء قادم. نُعدّ الفصل القادم من الابتكار الرقمي — من الصفر للأحتراف.</p>
+        <div class="cook" aria-hidden="true">
+          <span class="cook-dots">
+            <span></span><span></span><span></span>
+          </span>
+          <span>In the oven</span>
+        </div>
+      </article>
     </div>
-
-    <div class="hero__bottom anim-hero-bottom">
-      <a href="#" class="btn-cta">
-        <img src="assets/images/vector-btn.svg" alt="" class="btn-cta__bg">
-        <span class="btn-cta__text">
-          <img src="assets/images/arrow-btn.svg" alt="" class="btn-cta__arrow">
-          إبدا الآن
-        </span>
-      </a>
-      <div class="hero__video-thumb">
-        <img src="assets/images/frame-267.jpg" alt="" class="hero__video-img">
-      </div>
-      <img src="assets/images/arrow-down.svg" alt="" class="hero__arrow-down">
-    </div>
-  </section>
-
-  <!-- ===================== ABOUT SECTION ===================== -->
-  <section class="about" id="about">
-    <div class="container">
-      <div class="about__grid">
-        <div class="about__right reveal">
-          <h2 class="about__title">برنامج جاهز مع إمكانية تعديل الإضافات بما يتناسب مع مشروعك</h2>
-          <p class="about__text">تأكد من أن أي مشكلة تواجهها شركتك، يجب أن تواجهها على الأقل <span>10</span> شركات أخرى.</p>
-        </div>
-        <div class="about__left reveal">
-          <div class="about__banner-wrap">
-            <img src="assets/images/about-banner-bg.svg" alt="" class="about__banner-bg">
-            <span class="about__banner-text">لهذا السبب تم إنشاء</span>
-          </div>
-          <img src="assets/images/sifrr-text-logo.svg" alt="صفر" class="about__logo-large">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== WHO WE ARE / 4 BASICS ===================== -->
-  <section class="who-we-are" id="who-we-are">
-    <div class="container">
-      <h2 class="section-title section-title--who reveal">
-        <span class="who-qmark">؟</span>
-        <span>من نحن</span>
-      </h2>
-    </div>
-  </section>
-
-  <section class="basics" id="basics">
-    <img src="assets/images/sidebar-dots.svg" alt="" class="basics__sidebar-dots" aria-hidden="true">
-    <div class="container">
-      <div class="basics__header">
-        <h2 class="basics__title reveal">
-          من خلال <span class="basics__title--bold-gradient">4</span> <span class="basics__title--bold-gradient">أساسيات</span>
-        </h2>
-      </div>
-
-      <div class="basics__rows">
-        <div class="basics__row reveal-row">
-          <div class="basics__row-title">الفكرة</div>
-          <div class="basics__row-desc">من إعداد مؤسس شركة Digital Blocks (أحمد)</div>
-          <div class="basics__row-sub">لكن الأفكار تبقى أحلامًا إذا لم تُكتب</div>
-        </div>
-        <div class="basics__row reveal-row">
-          <div class="basics__row-title">النص</div>
-          <div class="basics__row-desc">تحويل الفكرة إلى كلمات وجمل (ضياء)</div>
-          <div class="basics__row-sub">لكن الأفكار تبقى أحلامًا إذا لم تُكتب</div>
-        </div>
-        <div class="basics__row reveal-row">
-          <div class="basics__row-title">التصميم</div>
-          <div class="basics__row-desc">تحويل الفكرة إلى واقع من خلال تنفيذها من خلال الكود (المطور)</div>
-          <div class="basics__row-sub">لكن الأفكار تبقى أحلامًا إذا لم تُكتب</div>
-        </div>
-        <div class="basics__row reveal-row">
-          <div class="basics__row-title">الأداة</div>
-          <div class="basics__row-desc">تحويل الفكرة إلى واقع من خلال تنفيذها من خلال الكود (المطور)</div>
-          <div class="basics__row-sub">لكن الأفكار تبقى أحلامًا إذا لم تُكتب</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== WRITING SECTION ===================== -->
-  <section class="writing" id="writing">
-    <div class="container">
-      <div class="writing__title-wrap reveal">
-        <h2 class="writing__title">نبدأ بالكتابة على الورق وننتهي بالكتابة على لوحة المفاتيح لإنتاج البرنامج</h2>
-      </div>
-
-      <div class="writing__content">
-        <div class="writing__right-side">
-          <div class="writing__box reveal">
-            <span>الغريب هو الجميع يكتب!</span>
-          </div>
-
-          <div class="writing__points">
-            <div class="writing__point reveal">
-              <div class="writing__point-content">
-                <p><strong>1-</strong> والأمر الأكثر غرابة هو أنك ترى هذا النص فقط…</p>
-                <span class="writing__point-label">تبادل الأفكار</span>
-              </div>
-            </div>
-            <div class="writing__point reveal">
-              <div class="writing__point-content">
-                <p><strong>2-</strong> ولكنك لا ترى كيف ولدت الفكرة…</p>
-                <span class="writing__point-label">رسم تخطيطي</span>
-              </div>
-            </div>
-            <div class="writing__point reveal">
-              <div class="writing__point-content">
-                <p><strong>3-</strong> ولا كيف كتبت الرموز…</p>
-                <span class="writing__point-label">تطوير</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="writing__illustration reveal">
-          <img src="assets/images/lightbulb-main.svg" alt="" class="writing__lightbulb-img">
-          <img src="assets/images/lightbulb-obj-1.svg" alt="" class="writing__float writing__float--1">
-          <img src="assets/images/lightbulb-obj-3.svg" alt="" class="writing__float writing__float--2">
-          <img src="assets/images/lightbulb-pen-1.svg" alt="" class="writing__float writing__float--3">
-          <img src="assets/images/lightbulb-9.png" alt="" class="writing__float writing__float--4">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== PROGRAMS SECTION ===================== -->
-  <section class="programs" id="programs">
-    <div class="programs__blur programs__blur--top"></div>
-    <div class="programs__bg"></div>
-    <div class="container">
-      <h2 class="programs__title reveal">ما هي البرامج التي قمنا بإنشائها ؟</h2>
-      <div class="programs__cards">
-        <div class="programs__card reveal">
-          <img src="assets/images/card-vector-top.svg" alt="" class="programs__card-decor programs__card-decor--top">
-          <img src="assets/images/card-vector-bg.svg" alt="" class="programs__card-decor programs__card-decor--bg">
-          <div class="programs__card-image">
-            <img src="assets/images/3d-maillime.png" alt="ميل لايم" class="programs__card-3d">
-          </div>
-          <div class="programs__card-info">
-            <h3>ميل لايم</h3>
-            <p>منصة عربية 100% مصممة لأتمتة رسائل البريد الإلكتروني ورسائل الواتس آب والرسائل النصية القصيرة</p>
-            <a href="#" class="btn-cta btn-cta--sm">
-              <img src="assets/images/vector-btn.svg" alt="" class="btn-cta__bg">
-              <span class="btn-cta__text">
-                <img src="assets/images/arrow-btn.svg" alt="" class="btn-cta__arrow">
-                اعرف المزيد
-              </span>
-            </a>
-          </div>
-        </div>
-        <div class="programs__card reveal">
-          <img src="assets/images/card-vector-top.svg" alt="" class="programs__card-decor programs__card-decor--top">
-          <img src="assets/images/card-vector-bg.svg" alt="" class="programs__card-decor programs__card-decor--bg">
-          <div class="programs__card-image">
-            <img src="assets/images/3d-c3.png" alt="C3" class="programs__card-3d">
-          </div>
-          <div class="programs__card-info">
-            <h3>C3</h3>
-            <p>برنامج يقدم خدمة ودعمًا للعملاء، مصمم لتعزيز التواصل مع فريق الدعم. متوفر باشتراك شهري.</p>
-            <a href="#" class="btn-cta btn-cta--sm">
-              <img src="assets/images/vector-btn.svg" alt="" class="btn-cta__bg">
-              <span class="btn-cta__text">
-                <img src="assets/images/arrow-btn.svg" alt="" class="btn-cta__arrow">
-                اعرف المزيد
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="programs__blur programs__blur--bottom"></div>
-  </section>
-
-  <!-- ===================== VISION & MISSION SECTION ===================== -->
-  <section class="vision" id="vision">
-    <div class="container">
-      <h2 class="section-title reveal">رؤية ورسالة <span class="text-accent">شركتنا</span></h2>
-
-      <div class="vision__box reveal">
-        <div class="vision__box-content">
-          <p>نُطوّر برامج حاسوبية لتوفير حلول مبتكرة تُسهّل عمل المشاريع وتُحلّ المشاكل الشائعة التي تواجه الشركات.</p>
-        </div>
-        <div class="vision__box-label">
-          <div class="vision__box-label-top">
-            <h3>رؤيتنا</h3>
-          </div>
-          <div class="vision__box-label-bottom">
-            <img src="assets/images/vision-vector.svg" alt="" class="vision__icon">
-          </div>
-        </div>
-      </div>
-
-      <div class="mission reveal">
-        <div class="mission__header">
-          <img src="assets/images/sifrr-logo.svg" alt="صفر" class="mission__logo-sm">
-          <span class="mission__label">مهمات شركة</span>
-        </div>
-        <div class="mission__rows">
-          <div class="mission__row reveal-row">
-            <p><strong>حل المشكلات:</strong> من خلال معرفة المشكلات وتقديم حلول جاهزة وفعّالة.</p>
-          </div>
-          <div class="mission__row reveal-row">
-            <p><strong>تبسيط العمل: </strong>من خلال برامج جاهزة لأتمتة العمليات وتحسين كفاءة الموظفين.</p>
-          </div>
-          <div class="mission__row reveal-row">
-            <p><strong>تحويل الأفكار إلى حلول عملية: </strong>تقديم خدمة شاملة تبدأ من ابتكار الفكرة وكتابتها وتنفيذها كبرنامج يخدم العملاء.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== CORE ELEMENTS SECTION ===================== -->
-  <section class="core" id="core">
-    <div class="container">
-      <h2 class="section-title reveal">العناصر الأساسية للشركة</h2>
-
-      <div class="core__cards">
-        <div class="core__card core__card--img-start reveal">
-          <div class="core__card-content">
-            <span class="core__card-num">1</span>
-            <div class="core__card-pill">الكتابة والابتكار</div>
-            <p>من كتابة الفكرة على الورق إلى تحويلها إلى أكواد برمجية.</p>
-          </div>
-          <div class="core__card-image core__card-image--br-bl">
-            <img src="assets/images/element-writing.jpg" alt="الكتابة والابتكار">
-          </div>
-        </div>
-        <div class="core__card core__card--img-end reveal">
-          <div class="core__card-image core__card-image--br-br">
-            <img src="assets/images/element-software.jpg" alt="تنفيذ البرنامج">
-          </div>
-          <div class="core__card-content">
-            <span class="core__card-num">2</span>
-            <div class="core__card-pill">تنفيذ البرنامج</div>
-            <p>تحويل الأفكار إلى برامج.</p>
-          </div>
-        </div>
-        <div class="core__card core__card--img-start reveal">
-          <div class="core__card-content">
-            <span class="core__card-num">3</span>
-            <div class="core__card-pill">التواصل والتفاعل</div>
-            <p>تؤكد أدواتنا الجاهزة على أهمية التفاعل المستمر مع العملاء.</p>
-          </div>
-          <div class="core__card-image core__card-image--br-bl">
-            <img src="assets/images/element-communication.jpg" alt="التواصل والتفاعل">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== FOOTER ===================== -->
-  <footer class="footer" id="footer">
-    <div class="footer__shapes">
-      <img src="assets/images/footer-vector-1.svg" alt="" class="footer__shape footer__shape--1">
-      <img src="assets/images/footer-vector-2.svg" alt="" class="footer__shape footer__shape--2">
-      <img src="assets/images/footer-vector-3.svg" alt="" class="footer__shape footer__shape--3">
-    </div>
-    <div class="footer__inner">
-      <div class="footer__right">
-        <img src="assets/images/footer-logo.svg" alt="صفر" class="footer__logo-img">
-        <p class="footer__desc">صمم تجارب رقمية مذهلة تعمل على خلق المزيد من السعادة في العالم.</p>
-        <nav class="footer__nav">
-          <a href="#solutions">الحلول والصناعات</a>
-          <a href="#ready">الحلول الجاهزة</a>
-          <a href="#tools">أدواتنا</a>
-          <a href="#company">شركة</a>
-          <a href="#">سياسة الخصوصية</a>
-        </nav>
-        <p class="footer__register">مسجلة في إنجلترا وويلز , رقم الشركة: 14198220.</p>
-      </div>
-      <div class="footer__left">
-        <h3>احصل على إشعار عند إطلاقنا</h3>
-        <p class="footer__left-sub">ابق على اطلاع بأحدث الأخبار والإعلانات والمقالات.</p>
-        <form class="footer__form" onsubmit="return false;">
-          <button type="submit" class="btn-subscribe">
-            <img src="assets/images/subscribe-btn.svg" alt="" class="btn-subscribe__bg">
-            <span class="btn-subscribe__text">اشترك الان</span>
-          </button>
-          <input type="email" placeholder="أدخل بريدك الإلكتروني" class="footer__input" dir="rtl">
-        </form>
-        <p class="footer__copy">جميع الحقوق محفوظة صفر © 2025 .</p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="animations.js"></script>
+  </main>
 </body>
 </html>
